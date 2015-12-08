@@ -125,14 +125,43 @@ func FromJSON(json_blob []byte) (*Forecast, error) {
 	return &f, nil
 }
 
-func GetResponse(key string, lat string, long string, time string, units Units) (*http.Response, error) {
+//Useful if you want to exclude certain pieces of data from the response
+type DataBlockType string
+
+const (
+	Currently DataBlockType = "Currently"
+	Minutely  DataBlockType = "Minutely"
+	Hourly    DataBlockType = "Hourly"
+	Daily     DataBlockType = "Daily"
+	Alerts    DataBlockType = "Alerts"
+	FlagData  DataBlockType = "Flags"
+	AlertData DataBlockType = "Alerts"
+)
+
+func GetResponse(key string, lat string, long string, time string, units Units, exclude []DataBlockType) (*http.Response, error) {
 	coord := lat + "," + long
+	//TODO(mattwarren1234 12/7/2015) : potentially add 'blocks' as a query param
+	//exclude=[blocks]:
+	// Exclude some number of data blocks from the API response.
+	//  This is useful for reducing latency and saving cache space.
+	//  [blocks] should be a comma-delimeted list (without spaces) of any of the following:
+	//  currently, minutely, hourly, daily, alerts, flags.
+	//  (Crafting a request with all of the above blocks excluded is exceedingly silly and not recommended.)
 
 	var url string
 	if time == "now" {
 		url = BASEURL + "/" + key + "/" + coord + "?units=" + string(units)
 	} else {
 		url = BASEURL + "/" + key + "/" + coord + "," + time + "?units=" + string(units)
+	}
+	if len(exclude) > 0 {
+		url = url + "&exclude="
+		for i, v := range exclude {
+			if i != 0 {
+				url = url + ","
+			}
+			url = url + v
+		}
 	}
 
 	res, err := http.Get(url)
