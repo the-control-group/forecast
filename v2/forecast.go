@@ -154,15 +154,16 @@ func GetResponse(key string, lat string, long string, time string, units Units) 
 	} else {
 		url = BASEURL + "/" + key + "/" + coord + "," + time + "?units=" + string(units)
 	}
-	if len(exclude) > 0 {
-		url = url + "&exclude="
-		for i, v := range exclude {
-			if i != 0 {
-				url = url + ","
-			}
-			url = url + v
-		}
-	}
+
+	// if len(exclude) > 0 {
+	// 	url = url + "&exclude="
+	// 	for i, v := range exclude {
+	// 		if i != 0 {
+	// 			url = url + ","
+	// 		}
+	// 		url = url + v
+	// 	}
+	// }
 
 	res, err := http.Get(url)
 	if err != nil {
