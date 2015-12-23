@@ -28,29 +28,29 @@ type DataPoint struct {
 	Time                   float64 `json:"time"`
 	Summary                string  `json:"summary"`
 	Icon                   string  `json:"icon"`
-	SunriseTime            float64 `json:"sunriseTime"`
-	SunsetTime             float64 `json:"sunsetTime"`
-	PrecipIntensity        float64 `json:"precipIntensity"`
-	PrecipIntensityMax     float64 `json:"precipIntensityMax"`
-	PrecipIntensityMaxTime float64 `json:"precipIntensityMaxTime"`
-	PrecipProbability      float64 `json:"precipProbability"`
-	PrecipType             string  `json:"precipType"`
-	PrecipAccumulation     float64 `json:"precipAccumulation"`
+	SunriseTime            float64 `json:"sunrise_time"`
+	SunsetTime             float64 `json:"sunset_time"`
+	PrecipIntensity        float64 `json:"precip_intensity"`
+	PrecipIntensityMax     float64 `json:"precip_intensity_max"`
+	PrecipIntensityMaxTime float64 `json:"precip_intensity_max_time"`
+	PrecipProbability      float64 `json:"precip_probability"`
+	PrecipType             string  `json:"precip_type"`
+	PrecipAccumulation     float64 `json:"precip_accumulation"`
 	Temperature            float64 `json:"temperature"`
-	TemperatureMin         float64 `json:"temperatureMin"`
-	TemperatureMinTime     float64 `json:"temperatureMinTime"`
-	TemperatureMax         float64 `json:"temperatureMax"`
-	TemperatureMaxTime     float64 `json:"temperatureMaxTime"`
-	ApparentTemperature    float64 `json:"apparentTemperature"`
-	DewPoint               float64 `json:"dewPoint"`
-	WindSpeed              float64 `json:"windSpeed"`
-	WindBearing            float64 `json:"windBearing"`
-	CloudCover             float64 `json:"cloudCover"`
+	TemperatureMin         float64 `json:"temperature_min"`
+	TemperatureMinTime     float64 `json:"temperature_min_time"`
+	TemperatureMax         float64 `json:"temperature_max"`
+	TemperatureMaxTime     float64 `json:"temperature_max_time"`
+	ApparentTemperature    float64 `json:"apparent_temperature"`
+	DewPoint               float64 `json:"dew_point"`
+	WindSpeed              float64 `json:"wind_speed"`
+	WindBearing            float64 `json:"wind_bearing"`
+	CloudCover             float64 `json:"cloud_cover"`
 	Humidity               float64 `json:"humidity"`
 	Pressure               float64 `json:"pressure"`
 	Visibility             float64 `json:"visibility"`
 	Ozone                  float64 `json:"ozone"`
-	MoonPhase              float64 `json:"moonPhase"`
+	MoonPhase              float64 `json:"moon_phase"`
 }
 
 type DataBlock struct {
