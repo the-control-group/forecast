@@ -138,7 +138,7 @@ const (
 	AlertData DataBlockType = "Alerts"
 )
 
-func GetResponse(key string, lat string, long string, time string, units Units, exclude []DataBlockType) (*http.Response, error) {
+func GetResponse(key string, lat string, long string, time string, units Units) (*http.Response, error) {
 	coord := lat + "," + long
 	//TODO(mattwarren1234 12/7/2015) : potentially add 'blocks' as a query param
 	//exclude=[blocks]:
