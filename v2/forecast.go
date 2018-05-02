@@ -48,15 +48,15 @@ type DataPoint struct {
 	ApparentTemperatureHighTime float64 `json:"apparentTemperatureHighTime"`
 	ApparentTemperatureLow      float64 `json:"apparentTemperatureLow"`
 	ApparentTemperatureLowTime  float64 `json:"apparentTemperatureLowTime"`
-	TemperatureMin              float64 `json:"temperature_min"`
-	TemperatureMinTime          float64 `json:"temperature_min_time"`
-	TemperatureMax              float64 `json:"temperature_max"`
-	TemperatureMaxTime          float64 `json:"temperature_max_time"`
+	TemperatureMin              float64 `json:"temperatureMin"`
+	TemperatureMinTime          float64 `json:"temperatureMinTime"`
+	TemperatureMax              float64 `json:"temperatureMax"`
+	TemperatureMaxTime          float64 `json:"temperatureMaxTime"`
 	ApparentTemperatureMin      float64 `json:"apparentTemperatureMin"`
 	ApparentTemperatureMinTime  float64 `json:"apparentTemperatureMinTime"`
 	ApparentTemperatureMax      float64 `json:"apparentTemperatureMax"`
 	ApparentTemperatureMaxTime  float64 `json:"apparentTemperatureMaxTime"`
-	DewPoint                    float64 `json:"dew_point"`
+	DewPoint                    float64 `json:"dewPoint"`
 	Humidity                    float64 `json:"humidity"`
 	Pressure                    float64 `json:"pressure"`
 	WindSpeed                   float64 `json:"windSpeed"`
