@@ -3,7 +3,6 @@ package forecast
 import (
 	"encoding/json"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"strconv"
 )
@@ -137,10 +136,6 @@ func FromJSON(jsonBlob []byte) (*Forecast, error) {
 	err := json.Unmarshal(jsonBlob, &f)
 	if err != nil {
 		return nil, err
-	}
-	log.Println(string(jsonBlob))
-	for _, v := range f.Daily.Data {
-		log.Println("FROM JSON", v)
 	}
 
 	return &f, nil
