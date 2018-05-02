@@ -29,9 +29,9 @@ type DataPoint struct {
 	Time                        float64 `json:"time"`
 	Summary                     string  `json:"summary"`
 	Icon                        string  `json:"icon"`
-	SunriseTime                 float64 `json:"sunrise_time"`
-	SunsetTime                  float64 `json:"sunset_time"`
-	MoonPhase                   float64 `json:"moon_phase"`
+	SunriseTime                 float64 `json:"sunriseTime"`
+	SunsetTime                  float64 `json:"sunsetTime"`
+	MoonPhase                   float64 `json:"moonPhase"`
 	PrecipIntensity             float64 `json:"precipIntensity"`
 	PrecipIntensityMax          float64 `json:"precipIntensityMax"`
 	PrecipIntensityMaxTime      float64 `json:"precipIntensityMaxTime"`
@@ -175,8 +175,6 @@ func GetResponse(key string, lat string, long string, time string, units Units) 
 	} else {
 		url = BASEURL + "/" + key + "/" + coord + "," + time + "?units=" + string(units)
 	}
-
-	log.Println(url)
 
 	// if len(exclude) > 0 {
 	// 	url = url + "&exclude="
