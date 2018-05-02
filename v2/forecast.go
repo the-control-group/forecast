@@ -39,6 +39,8 @@ type DataPoint struct {
 	PrecipType                  string  `json:"precipType"`
 	PrecipAccumulation          float64 `json:"precipAccumulation"`
 	TemperatureLow              float64 `json:"temperatureLow"`
+	Temperature                 float64 `json:"temperature"`
+	ApparentTemperature         float64 `json:"apparentTemperature"`
 	TemperatureLowTime          float64 `json:"temperatureLowTime"`
 	TemperatureHigh             float64 `json:"temperatureHigh"`
 	TemperatureHighTime         float64 `json:"temperatureHighTime"`
