@@ -3,6 +3,7 @@ package forecast
 import (
 	"encoding/json"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"strconv"
 )
@@ -25,32 +26,46 @@ type Flags struct {
 }
 
 type DataPoint struct {
-	Time                   float64 `json:"time"`
-	Summary                string  `json:"summary"`
-	Icon                   string  `json:"icon"`
-	SunriseTime            float64 `json:"sunrise_time"`
-	SunsetTime             float64 `json:"sunset_time"`
-	PrecipIntensity        float64 `json:"precip_intensity"`
-	PrecipIntensityMax     float64 `json:"precip_intensity_max"`
-	PrecipIntensityMaxTime float64 `json:"precip_intensity_max_time"`
-	PrecipProbability      float64 `json:"precip_probability"`
-	PrecipType             string  `json:"precip_type"`
-	PrecipAccumulation     float64 `json:"precip_accumulation"`
-	Temperature            float64 `json:"temperature"`
-	TemperatureMin         float64 `json:"temperature_min"`
-	TemperatureMinTime     float64 `json:"temperature_min_time"`
-	TemperatureMax         float64 `json:"temperature_max"`
-	TemperatureMaxTime     float64 `json:"temperature_max_time"`
-	ApparentTemperature    float64 `json:"apparent_temperature"`
-	DewPoint               float64 `json:"dew_point"`
-	WindSpeed              float64 `json:"wind_speed"`
-	WindBearing            float64 `json:"wind_bearing"`
-	CloudCover             float64 `json:"cloud_cover"`
-	Humidity               float64 `json:"humidity"`
-	Pressure               float64 `json:"pressure"`
-	Visibility             float64 `json:"visibility"`
-	Ozone                  float64 `json:"ozone"`
-	MoonPhase              float64 `json:"moon_phase"`
+	Time                        float64 `json:"time"`
+	Summary                     string  `json:"summary"`
+	Icon                        string  `json:"icon"`
+	SunriseTime                 float64 `json:"sunrise_time"`
+	SunsetTime                  float64 `json:"sunset_time"`
+	MoonPhase                   float64 `json:"moon_phase"`
+	PrecipIntensity             float64 `json:"precipIntensity"`
+	PrecipIntensityMax          float64 `json:"precipIntensityMax"`
+	PrecipIntensityMaxTime      float64 `json:"precipIntensityMaxTime"`
+	PrecipProbability           float64 `json:"precipProbability"`
+	PrecipType                  string  `json:"precipType"`
+	PrecipAccumulation          float64 `json:"precipAccumulation"`
+	TemperatureLow              float64 `json:"temperatureLow"`
+	TemperatureLowTime          float64 `json:"temperatureLowTime"`
+	TemperatureHigh             float64 `json:"temperatureHigh"`
+	TemperatureHighTime         float64 `json:"temperatureHighTime"`
+	ApparentTemperatureHigh     float64 `json:"apparentTemperatureHigh"`
+	ApparentTemperatureHighTime float64 `json:"apparentTemperatureHighTime"`
+	ApparentTemperatureLow      float64 `json:"apparentTemperatureLow"`
+	ApparentTemperatureLowTime  float64 `json:"apparentTemperatureLowTime"`
+	TemperatureMin              float64 `json:"temperature_min"`
+	TemperatureMinTime          float64 `json:"temperature_min_time"`
+	TemperatureMax              float64 `json:"temperature_max"`
+	TemperatureMaxTime          float64 `json:"temperature_max_time"`
+	ApparentTemperatureMin      float64 `json:"apparentTemperatureMin"`
+	ApparentTemperatureMinTime  float64 `json:"apparentTemperatureMinTime"`
+	ApparentTemperatureMax      float64 `json:"apparentTemperatureMax"`
+	ApparentTemperatureMaxTime  float64 `json:"apparentTemperatureMaxTime"`
+	DewPoint                    float64 `json:"dew_point"`
+	Humidity                    float64 `json:"humidity"`
+	Pressure                    float64 `json:"pressure"`
+	WindSpeed                   float64 `json:"windSpeed"`
+	WindGust                    float64 `json:"windGust"`
+	WindGustTime                float64 `json:"windGustTime"`
+	WindBearing                 float64 `json:"windBearing"`
+	CloudCover                  float64 `json:"cloudCover"`
+	UVIndex                     int     `json:"uvIndex"`
+	UVIndexTime                 int     `json:"uvIndexTime"`
+	Ozone                       float64 `json:"ozone"`
+	Visibility                  float64 `json:"visibility"`
 }
 
 type DataBlock struct {
@@ -115,17 +130,21 @@ func Get(key string, lat string, long string, time string, units Units) (*Foreca
 	return f, nil
 }
 
-func FromJSON(json_blob []byte) (*Forecast, error) {
+func FromJSON(jsonBlob []byte) (*Forecast, error) {
 	var f Forecast
-	err := json.Unmarshal(json_blob, &f)
+	err := json.Unmarshal(jsonBlob, &f)
 	if err != nil {
 		return nil, err
+	}
+	log.Println(string(jsonBlob))
+	for _, v := range f.Daily.Data {
+		log.Println("FROM JSON", v)
 	}
 
 	return &f, nil
 }
 
-//Useful if you want to exclude certain pieces of data from the response
+// DataBlockType is useful if you want to exclude certain pieces of data from the response
 type DataBlockType string
 
 const (
@@ -154,6 +173,8 @@ func GetResponse(key string, lat string, long string, time string, units Units) 
 	} else {
 		url = BASEURL + "/" + key + "/" + coord + "," + time + "?units=" + string(units)
 	}
+
+	log.Println(url)
 
 	// if len(exclude) > 0 {
 	// 	url = url + "&exclude="
